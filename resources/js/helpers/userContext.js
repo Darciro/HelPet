@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 export default class User extends Component {
 
     static getUser() {
-        axios.get('http://127.0.0.1:8000/api/user')
+        axios.get(baseUrl + '/api/user')
             .then(
                 (result) => {
                     return result;

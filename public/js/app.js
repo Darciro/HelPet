@@ -63931,7 +63931,7 @@ function injectIntoDevTools(devToolsConfig) {
     // Enables DevTools to append owner stacks to error messages in DEV mode.
     getCurrentFiber:  function () {
       return current;
-    } 
+    }
   }));
 }
 var IsSomeRendererActing$1 = ReactSharedInternals.IsSomeRendererActing;
@@ -69864,7 +69864,7 @@ var Main = /*#__PURE__*/function (_Component) {
       var _this2 = this;
 
       $('#main-header, #main-footer').addClass('d-none');
-      axios.get('http://127.0.0.1:8000/api/user').then(function (loggedInUser) {
+      axios.get(baseUrl + '/api/user').then(function (loggedInUser) {
         _this2.setState({
           isLoaded: true,
           user: loggedInUser
@@ -70271,7 +70271,7 @@ import React, {Component} from 'react';
 export default class User extends Component {
 
     static getUser() {
-        axios.get('http://127.0.0.1:8000/api/user')
+        axios.get(baseUrl + '/api/user')
             .then(
                 (result) => {
                     return result;

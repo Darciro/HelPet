@@ -76,7 +76,7 @@ export default class Main extends Component {
     componentDidMount() {
         $('#main-header, #main-footer').addClass('d-none');
 
-        axios.get('http://127.0.0.1:8000/api/user')
+        axios.get(baseUrl + '/api/user')
             .then(
                 (loggedInUser) => {
                     this.setState({

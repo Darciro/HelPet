@@ -33,7 +33,7 @@ export default class Header extends Component  {
             uid: '5QWakJb9hJgyWrWZ0YnEmb1piGt1'
         }
 
-        axios.post('http://127.0.0.1:8000/api/logout', user)
+        axios.post(baseUrl + '/api/logout', user)
             .then((response)=>{
                 if( response.status === 200 ) {
                     window.location.href = response.data.redirectTo;
