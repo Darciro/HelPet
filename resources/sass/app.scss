@@ -1,0 +1,85 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// @import '~argon-design-system-free/assets/scss/argon-design-system';
+
+@import '~argon-design-system-free/assets/css/nucleo-icons.css';
+@import '~argon-design-system-free/assets/css/argon-design-system.min.css';
+
+.bg-primary {
+    background-color: #303960 !important;
+}
+
+.bg-secondary {
+    background-color: #ea9a96 !important;
+}
+
+.btn-warning {
+    color: #212529;
+    background-color: #f8b24f;
+    border-color: #f8b24f;
+}
+
+.footer {
+    background: #e5e5e5;
+    padding: 1.5rem 0;
+}
+
+.card-profile .card-profile-image {
+    position: relative;
+    width: 180px;
+    height: 100px;
+}
+
+.card-profile .card-profile-image img {
+    max-width: 180px;
+    border-radius: .25rem;
+    transform: translate(-50%,-30%);
+    position: absolute;
+    left: 50%;
+    transition: all .15s ease;
+
+    &.owner {
+        width: 90px;
+        height: 90px;
+        right: 0;
+        left: inherit;
+        transform: translate(50%, 15%);
+        bottom: 0;
+    }
+}
+
+.card-profile .card-profile-image img, .shadow {
+    box-shadow: 0 15px 35px rgba(50,50,93,.1),0 5px 15px rgba(0,0,0,.07)!important;
+}
+
+.card-profile .card-profile-stats {
+    padding: 1rem 0;
+}
+
+.card-profile .card-profile-stats>div {
+    text-align: center;
+    margin-right: 1rem;
+    padding: .875rem;
+}
+
+.card-profile .card-profile-stats>div .heading {
+    font-size: 1.1rem;
+    font-weight: 700;
+    display: block;
+}
+
+.card-profile .card-profile-stats>div .description {
+    font-size: .875rem;
+    color: #adb5bd;
+}
+
+.card-profile .card-profile-actions {
+    padding: .875rem;
+}
