@@ -8,7 +8,7 @@ export default class Login extends Component {
             pass: $('#pass').val(),
         }
 
-        axios.post('http://127.0.0.1:8000/api/login', user)
+        axios.post(baseUrl + '/api/login', user)
             .then((response)=>{
                 if( response.status === 200 ) {
                     console.log(response.data);

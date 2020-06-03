@@ -30,7 +30,7 @@ export default class AddPet extends Component {
             state: 'missing',
         }
 
-        axios.post('http://127.0.0.1:8000/api/pets', pet)
+        axios.post(baseUrl + '/api/pets', pet)
             .then((response)=>{
                 if( response.status === 200 ) {
                     window.location.href = response.data.redirectTo;

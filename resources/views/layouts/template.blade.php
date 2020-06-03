@@ -24,7 +24,8 @@
 
     @yield('content')
 
-    <script>
+    <script type="text/javascript">
+        const baseUrl = "{{ url('/') }}";
         /*let user = {}
         export default user;*/
 

@@ -9,18 +9,12 @@ export default class Register extends Component {
             pass: $('#pass').val(),
         }
 
-        axios.post('http://127.0.0.1:8000/api/register', user)
+        axios.post(baseUrl + '/api/register', user)
             .then((response)=>{
                 console.log(response.data, response.data.registered);
                 if( response.status === 200 ) {
-
                     console.log('Redirecting to ', response.data.redirectTo);
                     window.location.href = response.data.redirectTo;
-
-                    // history.push("/");
-                    // this.props.history.push('/')
-                    // return <Redirect to={response.data.redirectTo} />
-                    // return <Redirect to="/" />
                 }
             })
     }

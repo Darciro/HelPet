@@ -16,8 +16,7 @@ export default class Home extends Component {
 
     componentDidMount() {
         //$('#main-header, #main-footer').addClass('d-none');
-
-        fetch("http://127.0.0.1:8000/api/pets")
+        fetch(baseUrl + "/api/pets")
             .then( res => res.json() )
             .then(
                 (pets) => {

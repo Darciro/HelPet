@@ -70959,7 +70959,7 @@ var AddPet = /*#__PURE__*/function (_Component) {
         petPhotoPath: $('#petPhotoPath').val(),
         state: 'missing'
       };
-      axios.post('http://127.0.0.1:8000/api/pets', pet).then(function (response) {
+      axios.post(baseUrl + '/api/pets', pet).then(function (response) {
         if (response.status === 200) {
           window.location.href = response.data.redirectTo;
         }
@@ -71222,7 +71222,7 @@ var Home = /*#__PURE__*/function (_Component) {
       var _this2 = this;
 
       //$('#main-header, #main-footer').addClass('d-none');
-      fetch("http://127.0.0.1:8000/api/pets").then(function (res) {
+      fetch(baseUrl + "/api/pets").then(function (res) {
         return res.json();
       }).then(function (pets) {
         var petsArray = [];
@@ -71409,7 +71409,7 @@ var Login = /*#__PURE__*/function (_Component) {
         email: $('#email').val(),
         pass: $('#pass').val()
       };
-      axios.post('http://127.0.0.1:8000/api/login', user).then(function (response) {
+      axios.post(baseUrl + '/api/login', user).then(function (response) {
         if (response.status === 200) {
           console.log(response.data);
           window.location.href = response.data.redirectTo;
@@ -71669,7 +71669,7 @@ var Pet = /*#__PURE__*/function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      fetch("http://127.0.0.1:8000/api/pets/" + this.props.match.params.id).then(function (res) {
+      fetch(baseUrl + "/api/pets/" + this.props.match.params.id).then(function (res) {
         return res.json();
       }).then(function (result) {
         console.log(result);
@@ -71814,7 +71814,7 @@ var Pets = /*#__PURE__*/function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      fetch("http://127.0.0.1:8000/api/pets").then(function (res) {
+      fetch(baseUrl + "/api/pets").then(function (res) {
         return res.json();
       }).then(function (pets) {
         var petsArray = [];
@@ -71954,15 +71954,12 @@ var Register = /*#__PURE__*/function (_Component) {
         email: $('#email').val(),
         pass: $('#pass').val()
       };
-      axios.post('http://127.0.0.1:8000/api/register', user).then(function (response) {
+      axios.post(baseUrl + '/api/register', user).then(function (response) {
         console.log(response.data, response.data.registered);
 
         if (response.status === 200) {
           console.log('Redirecting to ', response.data.redirectTo);
-          window.location.href = response.data.redirectTo; // history.push("/");
-          // this.props.history.push('/')
-          // return <Redirect to={response.data.redirectTo} />
-          // return <Redirect to="/" />
+          window.location.href = response.data.redirectTo;
         }
       });
     }

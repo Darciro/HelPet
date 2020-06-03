@@ -14,7 +14,7 @@ export default class Pet extends Component {
     }
 
     componentDidMount() {
-        fetch("http://127.0.0.1:8000/api/pets/" + this.props.match.params.id)
+        fetch(baseUrl + "/api/pets/" + this.props.match.params.id)
             .then( res => res.json() )
             .then(
                 (result) => {
