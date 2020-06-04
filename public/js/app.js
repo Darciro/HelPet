@@ -92407,7 +92407,7 @@ var Header = /*#__PURE__*/function (_Component) {
     value: function showRegisterButton() {
       if (!this.state.userIsLoggedIn) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          className: "nav-item d-none d-lg-block ml-lg-4"
+          className: "nav-item d-block d-lg-block"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           className: "btn btn-light btn-icon",
           to: "/register"
@@ -92428,7 +92428,7 @@ var Header = /*#__PURE__*/function (_Component) {
     value: function showLogginButton() {
       if (!this.state.userIsLoggedIn) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          className: "nav-item d-none d-lg-block"
+          className: "nav-item d-block d-lg-block"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           className: "btn btn-light btn-icon",
           to: "/login"

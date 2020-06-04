@@ -66,7 +66,7 @@ export default class Header extends Component  {
 
     showRegisterButton() {
         if( !this.state.userIsLoggedIn ) {
-            return <li className="nav-item d-none d-lg-block ml-lg-4">
+            return <li className="nav-item d-block d-lg-block">
                 <Link className="btn btn-light btn-icon" to="/register">
                     <span className="btn-inner--icon">
                         <i className="fas fa-sign-in-alt" style={{marginRight: "15px"}}></i>
@@ -79,7 +79,7 @@ export default class Header extends Component  {
 
     showLogginButton() {
         if( !this.state.userIsLoggedIn ) {
-            return <li className="nav-item d-none d-lg-block">
+            return <li className="nav-item d-block d-lg-block">
                 <Link className="btn btn-light btn-icon" to="/login">
                     <span className="btn-inner--icon">
                         <i className="fas fa-sign-in-alt" style={{marginRight: "15px"}}></i>
