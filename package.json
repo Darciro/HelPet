@@ -30,6 +30,9 @@
         "webpack-livereload-plugin": "^1.2.0"
     },
     "dependencies": {
+        "moment": "^2.26.0",
+        "moment-timezone": "^0.5.31",
+        "react-moment": "^0.9.7",
         "react-router-dom": "^5.2.0"
     },
     "babel": {

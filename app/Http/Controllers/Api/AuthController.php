@@ -10,6 +10,10 @@ class AuthController extends Controller
 {
     private $auth;
 
+    /**
+     * AuthController constructor.
+     * https://firebase-php.readthedocs.io/en/stable/authentication.html
+     */
     public function __construct()
     {
         $firebase = (new Factory)->withServiceAccount(base_path() . '/firebase-conf/' . env('FIREBASE_SERVICE_ACCOUNT_JSON_KEY'));
@@ -18,40 +22,56 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        try {
-            $createdUser = $this->auth->createUserWithEmailAndPassword($request->email, $request->pass);
+        $validatedData = $request->validate([
+            'name'      => 'required',
+            'email'     => 'required|email',
+            'password'  => 'required|min:6',
+        ]);
 
-            // $createdUser->displayName = $request->('name');
-            $createdUser = $this->auth->updateUser($createdUser->uid, array(
-                'displayName' => $request->name
-            ));
+        if( $validatedData ) :
 
-            $this->doLogin($createdUser);
+            try {
+                $createdUser = $this->auth->createUserWithEmailAndPassword($request->email, $request->password);
+                $createdUser = $this->auth->updateUser($createdUser->uid, array(
+                    'displayName' => $request->name
+                ));
 
-            return response()->json([
-                'registered' => true,
-                'redirectTo' => url('/')
-            ]);
+                $this->doLogin($createdUser->uid, $createdUser->email, $createdUser->displayName);
 
-        } catch (\InvalidArgumentException $e) {
+                return response()->json([
+                    'registered' => true,
+                    'redirectTo' => url('/')
+                ]);
 
-            return response()->json($e->getMessage());
+            } catch (\Kreait\Firebase\Exception\AuthException $e) {
+                return response()->json([
+                    'errors' => array($e->getMessage()),
+                    'message' => $e->getMessage()
+                ], 400);
+            }
 
-        }
+        endif;
     }
 
     public function login(Request $request)
     {
+
         try {
-            $signInResult = $this->auth->signInWithEmailAndPassword($request->email, $request->pass);
-            $this->doLogin($signInResult->data());
+            $signInResult = $this->auth->signInWithEmailAndPassword($request->email, $request->password);
+            $signInResult = $signInResult->data() ;
+
+            $this->doLogin($signInResult['localId'], $signInResult['email'], $signInResult['displayName']);
 
             return response()->json([
                 'logged' => true,
                 'redirectTo' => url('/')
             ]);
-        } catch (\InvalidArgumentException $e) {
-            return response()->json($e->getMessage());
+
+        } catch (\Kreait\Firebase\Auth\SignIn\FailedToSignIn $e) {
+            return response()->json([
+                'errors' => array($e->getMessage()),
+                'message' => $e->getMessage()
+            ], 400);
         }
 
     }
@@ -59,11 +79,8 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $user = session()->get('user');
-
-        $this->auth->revokeRefreshTokens($user['localId']);
+        $this->auth->revokeRefreshTokens($user['uid']);
         session()->put('user', null);
-
-        // return response()->json(['status' => 'ok', 'sessionX' => session('user') ]);
 
         return response()->json([
             'loggedOut' => true,
@@ -71,10 +88,15 @@ class AuthController extends Controller
         ]);
     }
 
-    public function doLogin($user)
+    public function doLogin($uid, $email, $displayName)
     {
+        $user = array(
+            'uid'           => $uid,
+            'email'         => $email,
+            'displayName'   => $displayName,
+            'isLoggedIn'    => true,
+        );
 
-        $user['isLoggedIn'] = true;
         session()->put('user', $user);
     }
 }

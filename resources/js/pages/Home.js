@@ -39,22 +39,30 @@ export default class Home extends Component {
             )
     }
 
+    openIntrovideo() {
+        var $videoSrc = $('.video-btn').data( "src" );
+        // when the modal is opened autoplay it
+        $('#introModal').on('shown.bs.modal', function (e) {
+            // set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
+            $("#video").attr('src',$videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0" );
+        })
+
+        // stop playing the youtube video when I close the modal
+        $('#introModal').on('hide.bs.modal', function (e) {
+            // a poor man's stop video
+            $("#video").attr('src',$videoSrc);
+        })
+    }
+
     render() {
+        let today = new Date();
+        console.log(today, today.toISOString() )
         const { error, isLoaded, pets } = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
             return(
                 <div className="home">
-
-                    <Hero title="Ajude um Pet"
-                          sub-title="A hora é agora!!!"
-                          desc={[
-                              <a href="https://www.creative-tim.com/product/argon-design-system" className="btn btn-warning btn-icon mt-3 mb-sm-0">
-                                  <span className="btn-inner--icon"><i className="ni ni-button-play"></i></span>
-                                  <span className="btn-inner--text">Veja como contribuir</span>
-                              </a>
-                          ]} />
 
                     <div className="container py-9">
                         <div className="row h-100 justify-content-center align-items-center">
@@ -77,10 +85,27 @@ export default class Home extends Component {
                     <Hero title="Ajude um Pet"
                           sub-title="A hora é agora!!!"
                           desc={[
-                              <a href="https://www.creative-tim.com/product/argon-design-system" className="btn btn-warning btn-icon mt-3 mb-sm-0">
-                                  <span className="btn-inner--icon"><i className="ni ni-button-play"></i></span>
-                                  <span className="btn-inner--text">Veja como contribuir</span>
-                              </a>
+                              <div>
+                                  <button onClick={this.openIntrovideo} type="button" className="btn btn-warning btn-icon mt-3 mb-sm-0 video-btn" data-toggle="modal" data-target="#introModal" data-src="https://www.youtube.com/embed/NGC8IS4gjpM">
+                                      <span className="btn-inner--icon"><i className="ni ni-button-play"></i></span>
+                                      <span className="btn-inner--text">Veja como contribuir</span>
+                                  </button>
+
+                                  <div className="modal intro-modal fade" id="introModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                      <div className="modal-dialog modal-xl">
+                                          <div className="modal-content">
+                                              <div className="modal-body">
+                                                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                                      <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                  <div className="embed-responsive embed-responsive-16by9">
+                                                      <iframe className="embed-responsive-item" src="" id="video" allowscriptaccess="always" allow="autoplay"></iframe>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
                           ]} />
 
                     <div className="section">
@@ -91,6 +116,7 @@ export default class Home extends Component {
                                     {pets.map(pet => (
                                         <Card id={pet.id}
                                               pet_owner={pet.pet_owner}
+                                              createdAt={pet.createdAt}
                                               name={pet.name}
                                               age={pet.age}
                                               type={pet.type}
@@ -119,3 +145,4 @@ export default class Home extends Component {
         }
     }
 }
+

@@ -24,7 +24,7 @@ class AppController extends Controller
         if( session()->has('user') ) {
             // dd(session()->get('user'));
             $user = array(
-                'uid'         => session('user')['localId'],
+                'uid'         => session('user')['uid'],
                 'email'       => session('user')['email'],
                 'displayName' => session('user')['displayName'],
             );

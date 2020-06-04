@@ -24,8 +24,9 @@ class PetController extends Controller
      */
     public function index()
     {
-        // $pets = $this->database->getReference($this->petsRoot)->orderByKey()->limitToLast(5)->getValue();
-        $pets = $this->database->getReference($this->petsRoot)->getValue();
+        // $pets = $this->database->getReference($this->petsRoot)->orderByKey('createdAt', 'desc')->limitToLast(5)->getValue();
+        $pets = $this->database->getReference($this->petsRoot)->orderByKey('createdAt', 'desc')->limitToFirst(5)->getValue();
+        // $pets = $this->database->getReference($this->petsRoot)->getValue();
         return response()->json( $pets );
     }
 

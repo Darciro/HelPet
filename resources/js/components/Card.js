@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
+import Moment from 'react-moment';
+import 'moment-timezone';
 
 export default class Card extends Component {
 
@@ -12,6 +14,9 @@ export default class Card extends Component {
     }
 
     render() {
+        const createdAt = this.props.createdAt;
+
+
         return <div className="card-wrapper" style={{marginBottom: "100px"}}>
             {/*<div className="card card-profile shadow mt--150">*/}
             <div className="card card-profile shadow">
@@ -51,10 +56,14 @@ export default class Card extends Component {
                         </div>
                     </div>
                     <div className="text-center mt-5">
+                        <div className="h6 font-weight-300">
+                            <small>
+                                <Moment format="DD/MM/YYYY">{createdAt}</Moment>
+                            </small>
+                        </div>
                         <h3>{this.props.name}<span className="font-weight-light">, {this.props.age}</span></h3>
                         <div className="h6 font-weight-300"><i className="ni location_pin mr-2"></i>Dono(a): Fulano de Tal</div>
-                        <div className="h6 mt-4"><i className="ni business_briefcase-24 mr-2"></i>Perdido, Última localização: {this.props.last_known_location}</div>
-                        <div><i className="ni education_hat mr-2"></i>Some cool description here</div>
+                        <div className="h6 mt-4"><i className="fas fa-map-marker-alt"></i> Perdido, Última localização: {this.props.last_known_location}</div>
                     </div>
                     <div className="mt-5 py-5 border-top text-center">
                         <div className="row justify-content-center">
